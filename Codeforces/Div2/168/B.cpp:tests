@@ -1,0 +1,14 @@
+[
+	{
+		"test": "1\nbaa\n"
+	},
+	{
+		"test": "1\na\n"
+	},
+	{
+		"test": "1\naa\n"
+	},
+	{
+		"test": "4\na\naaa\nabb\npassword\n"
+	}
+]
