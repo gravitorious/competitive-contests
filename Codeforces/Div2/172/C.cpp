@@ -58,7 +58,28 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-    
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    vector<int> suff(n);
+    if(s[n - 1] == '1') suff[n - 1] = 1;
+    else suff[n - 1] = -1;
+    for(int i = n - 2; i >= 0; i--){
+        if(s[i] == '1') suff[i] = suff[i + 1] + 1;
+        else suff[i] = suff[i + 1] - 1;
+    }
+    suff.erase(suff.begin());
+    sort(suff.rbegin(), suff.rend());
+    ll diff = 0;
+    int j = 0;
+    for(int i = 0; i < n - 1; i++){
+        diff += suff[i];
+        j++;
+        if(diff >= k) break;  
+    }
+    if(diff >= k) cout << j + 1<< '\n';
+    else cout << -1 << '\n';
 }
  
  
