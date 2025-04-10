@@ -1,6 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+template<typename T,typename U> ostream& operator<<(ostream& out,const pair<T,U>& p){
+	out<<"{" <<p.first<<","<<p.second<<"}";
+	return out;
+}
+
+template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v) {
+    cout << "["; for(int i = 0; i < (int) v.size(); i++) {if (i) cout << ", "; cout << v[i];} return cout << "]";
+} 
+
+template<typename T,typename U> ostream& operator<<(ostream& out,const map<T,U>& m){
+	out<<"{"; for(const auto &x : m) out<<"[" <<x.first<<","<<x.second<<"]";
+	out << "}";
+	return out;
+}
+
+
 vector<string> vec_splitter(string s) {
 	s += ',';
 	vector<string> res;
@@ -25,17 +41,3 @@ void debug_out(vector<string> args, int idx, int LINE_NUM, Head H, Tail... T) {
 
 #define debug(...) debug_out(vec_splitter(#__VA_ARGS__), 0, __LINE__, __VA_ARGS__)
 
-template<typename T,typename U> ostream& operator<<(ostream& out,const pair<T,U>& p){
-	out<<"{" <<p.first<<","<<p.second<<"}";
-	return out;
-}
-
-template<typename A> ostream& operator<<(ostream &cout, vector<A> const &v) {
-    cout << "["; for(int i = 0; i < (int) v.size(); i++) {if (i) cout << ", "; cout << v[i];} return cout << "]";
-} 
-
-template<typename T,typename U> ostream& operator<<(ostream& out,const map<T,U>& m){
-	out<<"{"; for(const auto &x : m) out<<"[" <<x.first<<","<<x.second<<"]";
-	out << "}";
-	return out;
-}
