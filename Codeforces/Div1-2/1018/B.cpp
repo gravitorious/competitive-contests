@@ -58,29 +58,37 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-	int n;
-	cin >> n;
-	vector<int> v(n);
-	for(int i = 0; i < n; i++) cin >> v[i];
-	vector<int> c(30);
+    int n, k;
+    cin >> n >> k;
+    vector<ll> l(n);
+    vector<ll> r(n);
+    for(int i = 0; i < n; i++) cin >> l[i];
+    for(int i = 0; i < n; i++) cin >> r[i];
+    vector<pair<ll, int>> v;
 	for(int i = 0; i < n; i++){
-		for(int j = 0; j < 30; j++){
-			c[j] += (v[i] >> j) & 1;	
+		v.emplace_back(make_pair(l[i], i));
+		v.emplace_back(make_pair(r[i], i));	
+	}
+	sort(v.rbegin(), v.rend());
+	ll ans = 0;
+	vector<bool> check(n + 1);
+	for(int i = 0; i < 2 * n; i++){
+		auto p = v[i];
+		if(!check[p.second]){
+			ans += p.first;
+			check[p.second] = true;
+			v[i].first = -1;
 		}
 	}
-	ll ans = -1;
-	for(int i = 0; i < n; i++){
-		ll sum = 0;
-		for(int j = 0; j < 30; j++){
-			int b = (v[i] >> j) & 1;
-			if(b){
-				sum += 1LL * (1 << j) * (n - c[j]);
-			}
-			else{
-				sum += 1LL * (1 << j) * c[j];
-			}
+	for(int i = 0; i < 2 * n; i++){
+		auto p = v[i];
+		if(v[i].first == -1) continue;
+		if(k == 1){
+			ans += 1;
+			break;
 		}
-		ans = max(ans, sum);
+		ans += p.first;
+		--k;
 	}
 	cout << ans << '\n';
 }

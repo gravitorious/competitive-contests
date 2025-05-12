@@ -58,31 +58,29 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-	int n;
-	cin >> n;
-	vector<int> v(n);
-	for(int i = 0; i < n; i++) cin >> v[i];
-	vector<int> c(30);
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < 30; j++){
-			c[j] += (v[i] >> j) & 1;	
-		}
-	}
-	ll ans = -1;
-	for(int i = 0; i < n; i++){
-		ll sum = 0;
-		for(int j = 0; j < 30; j++){
-			int b = (v[i] >> j) & 1;
-			if(b){
-				sum += 1LL * (1 << j) * (n - c[j]);
-			}
-			else{
-				sum += 1LL * (1 << j) * c[j];
-			}
-		}
-		ans = max(ans, sum);
-	}
-	cout << ans << '\n';
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    vector<int> ans(n);
+    --n;
+    int k = n + 1;
+    for(int i = n - 1; i >= 0; i--){
+    	if(s[i] == '>'){
+    		ans[i + 1] = k;
+    		k--;	
+    	}
+    }
+    for(int i = 0; i < n + 1; i++){
+    	if(ans[i] == 0){
+    		ans[i] = k;
+    		k--;	
+    	}
+    }
+    for(int i = 0; i < n + 1; i++){
+    	cout << ans[i] << ' ';
+    }
+    cout << '\n';
 }
  
 int main(){

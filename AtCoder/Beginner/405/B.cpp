@@ -58,31 +58,34 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-	int n;
-	cin >> n;
+	int n, m;
+	cin >> n >> m;
 	vector<int> v(n);
-	for(int i = 0; i < n; i++) cin >> v[i];
-	vector<int> c(30);
+	map<int, int> f;
 	for(int i = 0; i < n; i++){
-		for(int j = 0; j < 30; j++){
-			c[j] += (v[i] >> j) & 1;	
+		cin >> v[i];
+		f[v[i]]++;
+	}
+	if(m > n){
+		cout << 0;
+		return;
+	}
+	for(int i = 1; i <= m; i++){
+		if(f[i] == 0){
+			cout << 0;
+			return;
+		}	
+	}
+	int ans = 0;
+	for(int i = n - 1; i >= 0; i--){
+		f[v[i]]--;
+		ans++;
+		if(f[v[i]] == 0){
+			cout << ans;
+			return;	
 		}
 	}
-	ll ans = -1;
-	for(int i = 0; i < n; i++){
-		ll sum = 0;
-		for(int j = 0; j < 30; j++){
-			int b = (v[i] >> j) & 1;
-			if(b){
-				sum += 1LL * (1 << j) * (n - c[j]);
-			}
-			else{
-				sum += 1LL * (1 << j) * c[j];
-			}
-		}
-		ans = max(ans, sum);
-	}
-	cout << ans << '\n';
+	
 }
  
 int main(){
@@ -90,8 +93,6 @@ int main(){
 	cin.tie(0);
 	//freopen("input.txt", "r", stdin);
 	//freopen("output.txt", "w", stdout);
-	int tc;
-	cin >> tc;
-	while(tc--) solve();
+	solve();
 	return 0;
 }
