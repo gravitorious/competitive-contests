@@ -1,4 +1,4 @@
-////created by gravitorious
+///created by gravitorious
 #include <bits/stdc++.h>
 using namespace std;
  

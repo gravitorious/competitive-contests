@@ -1,4 +1,4 @@
-////created by gravitorious
+///created by gravitorious
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -58,7 +58,18 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-    
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for(int i = 0; i < n; i++) cin >> v[i];
+    int c = 0;
+    for(int i = 1; i < n; i++){
+    	if(v[i - 1] + 1 >= v[i]){
+    		c++;
+    		v[i] = v[i - 1];
+    	}	
+    }
+    cout << n - c << '\n';
 }
  
 int main(){

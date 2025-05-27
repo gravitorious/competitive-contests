@@ -1,4 +1,4 @@
-////created by gravitorious
+///created by gravitorious
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -58,7 +58,55 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-    
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    int non = 0, is = 0;
+    int t = n - 1;
+    int onespairs = 0, zerospairs = 0;
+    for(int i = 0; i < n / 2; i++){
+    	if(s[i] != s[t - i]) non++;
+    	else is++;
+    	if(s[i] == s[t - i] && s[i] == '0') zerospairs++;
+    	if(s[i] == s[t - i] && s[i] == '1') onespairs++;
+    } 
+    if(is == k){
+    	cout << "YES\n";
+    	return;	
+    }
+    if(k > is){
+    	while(non > 0){
+    		non -= 2;
+    		if(non < 0) break;
+    		is += 2;
+    		if(is == k) break;
+    	}
+    	if(is == k){
+    		cout << "YES\n";
+    		return;	
+    	}
+    	else{
+    		cout << "NO\n";
+    		return;	
+    	}
+    }
+    else{
+    	while(onespairs > 0 && zerospairs > 0){
+    		onespairs--;
+    		zerospairs--;
+    		is -= 2;	
+  			if(is == k) break;
+    	}
+    	if(is == k){
+    		cout << "YES\n";
+    		return;	
+    	}
+    	else{
+    		cout << "NO\n";
+    		return;	
+    	}
+    }
 }
  
 int main(){

@@ -1,4 +1,4 @@
-////created by gravitorious
+///created by gravitorious
 #include <bits/stdc++.h>
 using namespace std;
  
@@ -58,7 +58,45 @@ int myUniRand(int a, int b){
 }
  
 void solve(){
-    
+    int n;
+    cin >> n;
+    vector<pair<ll, ll>> v;
+    for(int i = 0; i < n; i++){
+    	int a, b;
+    	cin >> a >> b;
+    	v.emplace_back(make_pair(a, b));	
+    }
+    if(n == 1){
+   		cout << 1 << '\n';
+   		return;	
+    }
+    if(n == 2){
+    	cout << 2 << '\n';
+    	return;	
+    }
+    vector<pair<ll, ll>> xs = v, ys = v;
+    sort(xs.begin(), xs.end());
+    sort(ys.begin(), ys.end(), [](auto &l, auto &r){
+        return l.second < r.second;
+    });
+    ll minx, maxx, miny, maxy;
+    auto calc = [&](int i, int j) -> ll{
+        ll minx = xs[0].first, maxx = xs[n - 1].first;
+        ll miny = ys[0].second, maxy = ys[n - 1].second;   
+        if(i == minx) minx = xs[1].first;
+        if(i == maxx) maxx = xs[n - 2].first;
+        if(j == miny) miny = ys[1].second;
+        if(j == maxy) maxy = ys[n - 2].second;   
+        ll area = (maxx - minx + 1) * (maxy - miny + 1);
+        if(area < n) area += min((maxx - minx + 1), (maxy - miny + 1));
+        return area;
+    };
+    ll ans = 1e18 + 5;
+    ans = min(ans, calc(xs[0].first, xs[0].second));
+    ans = min(ans, calc(ys[0].first, ys[0].second));
+    ans = min(ans, calc(xs[n - 1].first, xs[n - 1].second));
+    ans = min(ans, calc(ys[n - 1].first, ys[n - 1].second));
+    cout << ans << '\n';
 }
  
 int main(){
